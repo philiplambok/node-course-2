@@ -2,7 +2,7 @@ let express = require('express');
 let hbs = require('hbs');
 let app = express();
 let fs = require('fs');
-
+const port = process.env.PORT || 3000; 
 
 hbs.registerPartials(__dirname + '/views/partials');
 hbs.registerHelper('screamIt', (text) => text.toUpperCase());
@@ -21,9 +21,9 @@ app.use((req,res,next)=>{
 	next();
 });
 
-app.use((req,res,next) => {
-	res.render('maintance.hbs');
-});
+// app.use((req,res,next) => {
+// 	res.render('maintance.hbs');
+// });
 
 app.use(express.static(__dirname + '/public'));
 
@@ -53,4 +53,6 @@ app.get('/bad', (req, res) => {
 });
 
 
-app.listen(3000);
+app.listen(port, ()=>{
+	console.log( `Your server is running in port:${port}` );
+});
